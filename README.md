@@ -8,3 +8,7 @@ https://www.npmjs.com/package/qrcode-terminal
 npm install
 ```
 
+### 编译
+```
+npm run build
+```
