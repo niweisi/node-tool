@@ -21,15 +21,23 @@ function getIPAdress() {
 
 const remoteIp = getIPAdress();
 
-const text = remoteIp + ':8899';
+const args = process.argv.slice(2);
+
+const port = args[0] ?? '8899';
+const type = args[1] ?? 'http';
+const params = args[2] ?? '?method=auto';
+
+const text = remoteIp + ':' + port;
 
 console.log(text);
 
 const wordArray = CryptoJS.enc.Utf8.parse(text);
 const base64 = CryptoJS.enc.Base64.stringify(wordArray);
 
-const str = 'http://' + base64 + '?method=auto';
+const str = type + '://' + base64 + params;
 console.log(str);
-qrcode.generate(str, {small: true},  function (qrcode) {
-       console.log(qrcode);
+qrcode.generate(str, {small: true}, function (qrcode) {
+    console.log(qrcode);
 });
+
+// node fiddler.js 8889 socks
